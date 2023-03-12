@@ -13,7 +13,9 @@ const ex1 = ref(null);
 let box = ref(null)
 
 onMounted(() => {
-  box.value = ex1.value.getBoundingClientRect();
+  useResizeObserver(document.body, () => {
+    box.value = ex1.value.getBoundingClientRect();
+  })
 });
 
 const calcX = computed(() => box.value ? -(y.value - box.value.y - box.value.height / 2) / constrain : 0);

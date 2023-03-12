@@ -2,8 +2,9 @@
   <div class="bg-white">
     <nav-bar class="fixed top-0 left-0 right-0" />
 
-    <div class="h-screen min-h-screen landing-bg bg-fixed">
-      <div class="container mx-auto min-h-full flex flex-wrap flex-row-reverse">
+    <div class="h-screen relative min-h-screen landing-bg bg-fixed">
+      <div class="absolute top-0 left-0 bottom-0 right-0 z-0 opacity-100 bg-gradient-to-r from-black to-transparent"></div>
+      <div class="container relative mx-auto min-h-full flex flex-wrap flex-row-reverse">
         <div
           class="max-w-lg mx-auto min-w-50 min-h-full flex flex-col items-center justify-center"
         >
@@ -12,7 +13,9 @@
         <div
           class="max-w-lg mx-auto min-w-50 min-h-full flex flex-col items-center justify-center"
         >
-          <h1 class="text-5xl font-black mb-8 font-serif text-white">Gazebo</h1>
+          <h1 class="text-5xl font-black mb-8 font-serif text-white">
+            <logo-title />
+          </h1>
           <h2 class="text-2xl font-bold mb-8 font-sans text-white">
             A calendar you will want to show
           </h2>
@@ -32,7 +35,7 @@
         <h2 class="text-2xl font-bold mb-8 font-serif">Embedding</h2>
         <p class="text-gray-600 text-lg mb-12">
           Our platform lets you seamlessly embed a stylish event calendar on
-          your website, giving your users a user-friendly tool to discover and
+          your website, giving your visitors a user-friendly tool to discover and
           keep track of upcoming events.
         </p>
       </div>
@@ -44,7 +47,7 @@
       >
         <h2 class="text-2xl font-bold mb-8 font-serif">Customization</h2>
         <p class="text-gray-600 text-lg mb-12">
-          With a variety of customizable themes and options, you can tailor your
+          With a variety of customizable themes and options, you can tailor the
           calendar to match your website's branding and design.
         </p>
       </div>

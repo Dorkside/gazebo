@@ -19,6 +19,6 @@
     "@vueuse/nuxt": "^9.13.0",
     "daisyui": "^2.51.3",
     "firebase": "^9.17.2",
-    "gc-event-list": "^0.2.4"
+    "gc-event-list": "^0.2.5"
   }
 }

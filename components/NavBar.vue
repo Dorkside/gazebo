@@ -9,7 +9,9 @@ const hasScrolled = computed(() => y.value > 0);
   <nav class="transition-colors z-10 ease-in-out duration-500" :class="{ 'bg-transparent': !hasScrolled, 'bg-primary': hasScrolled }">
     <div class="container mx-auto py-4">
       <div class="flex justify-between items-center">
-        <a href="#" class="text-white font-black text-lg font-serif">Gazebo</a>
+        <a href="#" class="text-white font-black text-lg font-serif">
+          <logo-title />
+        </a>
         <button class="burger block lg:hidden focus:outline-none">
           <svg
             class="h-6 w-6 fill-current text-white"
@@ -27,10 +29,10 @@ const hasScrolled = computed(() => y.value > 0);
           <a href="#" class="text-white py-2 px-4 hover:text-gray-400">
             Pricing
           </a>
-          <a href="#" class="text-white py-2 px-4 hover:text-gray-400">
+          <nuxt-link to="/login" class="text-white py-2 px-4 hover:text-gray-400">
             Sign In
-          </a>
-          <a href="#" class="btn ml-4 transition-colors ease-in-out duration-500" :class="{ 'btn-primary': !hasScrolled, 'btn-outline btn-accent': hasScrolled,  }">
+          </nuxt-link>
+          <a href="#" class="btn ml-4 transition-colors ease-in-out duration-500 font-bold" :class="{ 'btn-primary': !hasScrolled, 'btn-outline btn-accent': hasScrolled,  }">
             Sign Up
           </a>
         </div>
