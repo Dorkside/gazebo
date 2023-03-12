@@ -6,7 +6,7 @@ const hasScrolled = computed(() => y.value > 0);
 </script>
 
 <template>
-  <nav class="transition-colors ease-in-out duration-500" :class="{ 'bg-transparent': !hasScrolled, 'bg-primary': hasScrolled }">
+  <nav class="transition-colors z-10 ease-in-out duration-500" :class="{ 'bg-transparent': !hasScrolled, 'bg-primary': hasScrolled }">
     <div class="container mx-auto py-4">
       <div class="flex justify-between items-center">
         <a href="#" class="text-white font-black text-lg font-serif">Gazebo</a>

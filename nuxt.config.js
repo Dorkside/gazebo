@@ -3,7 +3,12 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Montserrat: true,
-      'Lexend+Deca': true,
+      "Lexend+Deca": true,
+    },
+  },
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag === "event-list",
     },
   },
 });
