@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxtjs/google-fonts": "^3.0.0",
+    "@nuxtjs/tailwindcss": "^6.4.1",
+    "@tailwindcss/typography": "^0.5.9",
+    "nuxt": "^3.2.3"
+  },
+  "dependencies": {
+    "@egoist/tailwindcss-icons": "^1.0.7",
+    "@iconify/json": "^2.2.33",
+    "@vueuse/nuxt": "^9.13.0",
+    "daisyui": "^2.51.3",
+    "firebase": "^9.17.2"
+  }
+}
