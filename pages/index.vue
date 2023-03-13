@@ -1,7 +1,5 @@
 <template>
   <div class="bg-white">
-    <nav-bar class="fixed top-0 left-0 right-0" />
-
     <div class="h-screen relative min-h-screen landing-bg bg-fixed">
       <div class="absolute top-0 left-0 bottom-0 right-0 z-0 opacity-100 bg-gradient-to-r from-black to-transparent"></div>
       <div class="container relative mx-auto min-h-full flex flex-wrap flex-row-reverse">
@@ -23,7 +21,7 @@
             The perfect solution for adding beautiful, customizable event
             listings to your website.
           </p>
-          <a href="#" class="btn btn-primary">Get Started</a>
+          <nuxt-link to="/dashboard" class="btn btn-primary">Get Started</nuxt-link>
         </div>
       </div>
     </div>

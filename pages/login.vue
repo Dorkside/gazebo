@@ -1,4 +1,7 @@
 <script setup>
+definePageMeta({
+  layout: false,
+});
 const { $signIn } = useNuxtApp();
 
 const loginWithGoogle = async () => {

@@ -3,10 +3,21 @@ import { computed } from "vue";
 const { y } = useWindowScroll();
 
 const hasScrolled = computed(() => y.value > 0);
+
+const route = useRoute();
+
+const isRoot = computed(() => {
+  return route.path === "/";
+});
+
+const userData = useState('userData')
 </script>
 
 <template>
-  <nav class="transition-colors z-10 ease-in-out duration-500" :class="{ 'bg-transparent': !hasScrolled, 'bg-primary': hasScrolled }">
+  <nav
+    class="transition-colors z-10 ease-in-out duration-500 h-20"
+    :class="{ 'bg-transparent': !hasScrolled, 'bg-primary': hasScrolled }"
+  >
     <div class="container mx-auto py-4">
       <div class="flex justify-between items-center">
         <a href="#" class="text-white font-black text-lg font-serif">
@@ -23,17 +34,37 @@ const hasScrolled = computed(() => y.value > 0);
           </svg>
         </button>
         <div id="nav-menu" class="hidden lg:flex lg:items-center">
-          <a href="#" class="text-white py-2 px-4 hover:text-gray-400">
-            Features
-          </a>
-          <a href="#" class="text-white py-2 px-4 hover:text-gray-400">
-            Pricing
-          </a>
-          <nuxt-link to="/login" class="text-white py-2 px-4 hover:text-gray-400">
-            Sign In
-          </nuxt-link>
-          <a href="#" class="btn ml-4 transition-colors ease-in-out duration-500 font-bold" :class="{ 'btn-primary': !hasScrolled, 'btn-outline btn-accent': hasScrolled,  }">
-            Sign Up
+          <template v-if="isRoot">
+            <a href="#" class="text-white py-2 px-4 hover:text-gray-400">
+              Features
+            </a>
+            <a href="#" class="text-white py-2 px-4 hover:text-gray-400">
+              Pricing
+            </a>
+            <nuxt-link
+              to="/login"
+              class="btn ml-4 transition-colors ease-in-out duration-500 font-bold"
+              :class="{
+                'btn-primary': !hasScrolled,
+                'btn-outline btn-accent': hasScrolled,
+              }"
+            >
+              Dashboard
+            </nuxt-link>
+          </template>
+
+          <a
+            v-else
+            href="#"
+            class="btn ml-4 transition-colors ease-in-out duration-500 font-bold"
+            :class="{
+              'btn-primary': !hasScrolled,
+              'btn-outline btn-accent': hasScrolled,
+            }"
+          >
+          <span v-if="userData">
+            {{ userData.email }}
+          </span>
           </a>
         </div>
       </div>
