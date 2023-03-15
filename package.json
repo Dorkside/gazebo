@@ -16,9 +16,14 @@
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.0.7",
     "@iconify/json": "^2.2.33",
+    "@pinia/nuxt": "^0.4.7",
     "@vueuse/nuxt": "^9.13.0",
     "daisyui": "^2.51.3",
     "firebase": "^9.17.2",
-    "gc-event-list": "^0.2.5"
+    "gc-event-list": "^0.2.5",
+    "pinia": "^2.0.33"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }

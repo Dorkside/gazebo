@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from "vue";
+import { useUserStore } from "~/stores/user.store";
 const { y } = useWindowScroll();
 
 const hasScrolled = computed(() => y.value > 0);
@@ -10,7 +11,7 @@ const isRoot = computed(() => {
   return route.path === "/";
 });
 
-const userData = useState('userData')
+const userStore = useUserStore();
 </script>
 
 <template>
@@ -62,8 +63,8 @@ const userData = useState('userData')
               'btn-outline btn-accent': hasScrolled,
             }"
           >
-          <span v-if="userData">
-            {{ userData.email }}
+          <span v-if="userStore.user">
+            {{ userStore.user.email }}
           </span>
           </a>
         </div>

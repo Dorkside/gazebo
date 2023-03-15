@@ -5,6 +5,8 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { useUserStore } from "~/stores/user.store";
 
 const config = {
   apiKey: "AIzaSyBeCq2hCK2QaRgL5Ip2AQXtcL00NWo2FNc",
@@ -15,17 +17,18 @@ const config = {
   appId: "1:1056062064150:web:94e282256a1b11dac71737",
 };
 
-export default defineNuxtPlugin((/* nuxtApp */) => {
+export default defineNuxtPlugin(({$pinia}) => {
   const app = initializeApp(config);
   const auth = getAuth(app);
+  const firestore = getFirestore(app);
 
-  let userData = useState("userData", () => null);
+  const userStore = useUserStore($pinia);
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      userData.value = user;
+      userStore.setUser(user);
     } else {
-      userData.value = null;
+      userStore.setUser(null);
     }
   });
 
@@ -33,6 +36,8 @@ export default defineNuxtPlugin((/* nuxtApp */) => {
   return {
     provide: {
       signIn: () => signInWithPopup(auth, provider),
+      signOut: () => auth.signOut(),
+      firestore,
     },
   };
 });

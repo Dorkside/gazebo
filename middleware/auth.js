@@ -1,6 +1,8 @@
+import {useUserStore} from '~/stores/user.store';
+const userStore = useUserStore();
+
 export default defineNuxtRouteMiddleware((to, from) => {
-  const userData = useState('userData')
-  if (!userData) {
+  if (!userStore.user) {
     return navigateTo('/login')
   }
 })

@@ -1,4 +1,8 @@
 <script setup>
+import {useUserStore} from "~/stores/user.store";
+
+const userStore = useUserStore();
+
 definePageMeta({
   layout: false,
 });
@@ -12,12 +16,10 @@ const loginWithGoogle = async () => {
   }
 };
 
-const userData = useState("userData");
-
 watch(
-  () => userData,
-  (userData) => {
-    if (userData) {
+  () => userStore.user,
+  (user) => {
+    if (user) {
       navigateTo("/dashboard", {replace: true});
     }
   },

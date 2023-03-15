@@ -1,5 +1,10 @@
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt", "@nuxtjs/google-fonts"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@vueuse/nuxt",
+    "@nuxtjs/google-fonts",
+    "@pinia/nuxt",
+  ],
   googleFonts: {
     families: {
       Montserrat: true,
@@ -10,5 +15,5 @@ export default defineNuxtConfig({
     compilerOptions: {
       isCustomElement: (tag) => tag === "event-list",
     },
-  },
+  }
 });
