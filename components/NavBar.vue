@@ -56,12 +56,12 @@ const userStore = useUserStore();
 
           <a
             v-else
-            href="#"
             class="btn ml-4 transition-colors ease-in-out duration-500 font-bold"
             :class="{
               'btn-primary': !hasScrolled,
               'btn-outline btn-accent': hasScrolled,
             }"
+            @click.prevent="$signOut"
           >
           <span v-if="userStore.user">
             {{ userStore.user.email }}

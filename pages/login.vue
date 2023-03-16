@@ -12,7 +12,6 @@ watch(
   () => userStore.user,
   (user) => {
     if (user) {
-      console.log(route.query)
       navigateTo(route.query.redirect || "/dashboard");
     }
   }

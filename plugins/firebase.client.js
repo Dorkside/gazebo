@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithPopup,
+  signInWithRedirect,
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
@@ -35,7 +35,7 @@ export default defineNuxtPlugin(({$pinia}) => {
   const provider = new GoogleAuthProvider();
   return {
     provide: {
-      signIn: () => signInWithPopup(auth, provider),
+      signIn: () => signInWithRedirect(auth, provider),
       signOut: () => auth.signOut(),
       firestore,
     },
