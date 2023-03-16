@@ -43,7 +43,7 @@ const userStore = useUserStore();
               Pricing
             </a>
             <nuxt-link
-              to="/login"
+              to="/dashboard"
               class="btn ml-4 transition-colors ease-in-out duration-500 font-bold"
               :class="{
                 'btn-primary': !hasScrolled,

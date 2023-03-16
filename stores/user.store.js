@@ -9,7 +9,11 @@ import {
 } from "firebase/firestore";
 
 export const useUserStore = defineStore("user", {
-  state: () => ({ user: null, calendars: [], refreshCalendarsFn: null }),
+  state: () => ({
+    user: null,
+    calendars: [],
+    refreshCalendarsFn: null,
+  }),
   actions: {
     setUser(user) {
       this.user = user;
@@ -61,6 +65,6 @@ export const useUserStore = defineStore("user", {
       } catch (error) {
         console.error("Error creating calendar:", error);
       }
-    },
+    }
   },
 });

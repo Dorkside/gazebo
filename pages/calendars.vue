@@ -8,7 +8,6 @@ definePageMeta({
 });
 
 const showModal = ref(false);
-const { calendars } = userStore;
 </script>
 
 <template>
@@ -19,7 +18,7 @@ const { calendars } = userStore;
       </button>
     </div>
     <ul class="divide-y divide-gray-200">
-      <li v-for="calendar in calendars" :key="calendar.id">
+      <li v-for="calendar in userStore.calendars" :key="calendar.id">
         <div class="flex items-center py-4">
           <div class="ml-3">
             <p class="text-lg font-medium text-gray-900">{{ calendar.name }}</p>

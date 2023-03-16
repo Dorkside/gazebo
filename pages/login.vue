@@ -1,29 +1,21 @@
 <script setup>
-import {useUserStore} from "~/stores/user.store";
-
-const userStore = useUserStore();
-
+import { useUserStore } from "~/stores/user.store";
 definePageMeta({
   layout: false,
 });
-const { $signIn } = useNuxtApp();
 
-const loginWithGoogle = async () => {
-  try {
-    await $signIn();
-  } catch (error) {
-    console.error(error);
-  }
-};
+const route = useRoute()
+
+const userStore = useUserStore();
 
 watch(
   () => userStore.user,
   (user) => {
     if (user) {
-      navigateTo("/dashboard", {replace: true});
+      console.log(route.query)
+      navigateTo(route.query.redirect || "/dashboard");
     }
-  },
-  { immediate: true }
+  }
 );
 </script>
 
@@ -38,7 +30,7 @@ watch(
       <h1 class="text-3xl font-bold mb-6">Log in to your account</h1>
       <button
         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        @click.prevent="loginWithGoogle"
+        @click.prevent="$signIn"
       >
         Log in with Google
       </button>
