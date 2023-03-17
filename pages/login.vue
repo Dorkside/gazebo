@@ -23,12 +23,12 @@ watch(
     <div
       class="max-w-md w-full mx-auto flex flex-col justify-center items-stretch"
     >
-      <h1 class="text-[70px] font-black mb-6 text-center">
+      <h1 class="text-[70px] font-bold mb-6 text-center">
         <logo-title />
       </h1>
-      <h1 class="text-3xl font-bold mb-6">Log in to your account</h1>
+      <h1 class="text-3xl font-medium mb-6">Log in to your account</h1>
       <button
-        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        class="bg-red-500 hover:bg-red-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         @click.prevent="$signIn"
       >
         Log in with Google

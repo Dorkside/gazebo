@@ -1,4 +1,4 @@
-const { iconsPlugin, getIconCollections } = require("@egoist/tailwindcss-icons")
+const { addDynamicIconSelectors } = require('@iconify/tailwind');
 
 module.exports = {
   theme: {
@@ -9,12 +9,9 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    iconsPlugin({
-      // Select the icon collections you want to use
-      collections: getIconCollections(["mdi", "lucide"]),
-    }),
     require('@tailwindcss/typography'),
-    require("daisyui")
+    require("daisyui"),
+    addDynamicIconSelectors()
   ],
   content: [
     `components/**/*.{vue,js,ts}`,

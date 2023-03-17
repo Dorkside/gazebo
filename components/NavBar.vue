@@ -21,7 +21,7 @@ const userStore = useUserStore();
   >
     <div class="container mx-auto py-4">
       <div class="flex justify-between items-center">
-        <a href="#" class="text-white font-black text-lg font-serif">
+        <a href="#" class="text-white font-bold text-lg font-serif">
           <logo-title />
         </a>
         <button class="burger block lg:hidden focus:outline-none">

@@ -17,16 +17,22 @@ const showModal = ref(false);
         Create Calendar
       </button>
     </div>
-    <ul class="divide-y divide-gray-200">
-      <li v-for="calendar in userStore.calendars" :key="calendar.id">
-        <div class="flex items-center py-4">
-          <div class="ml-3">
-            <p class="text-lg font-medium text-gray-900">{{ calendar.name }}</p>
-            <p class="text-sm text-gray-500">{{ calendar.description }}</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+      <div v-for="calendar in userStore.calendars" :key="calendar.id" class="calendar-card">
+        <div class="bg-white rounded-lg shadow-lg">
+          <div class="flex flex-col items-center overflow-hidden relative">
+            <div class="calendar-icon text-[120px] text-neutral-200 mb-3 absolute -top-2 left-2 -rotate-12">
+              <span class="icon-[fa--calendar]"></span>
+            </div>
+            <div class="text-center p-5 relative">
+              <h3 class="text-lg font-semibold text-gray-900">{{ calendar.name }}</h3>
+              <p class="text-sm text-gray-500 mt-1">{{ calendar.description }}</p>
+            </div>
           </div>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
     <CreateCalendarModal :show="showModal" @cancel="showModal = false" />
   </div>
 </template>
