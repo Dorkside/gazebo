@@ -1,5 +1,5 @@
 <script setup>
-import { computed, definePageMeta, useRoute, useHead } from '#imports'
+import { computed, definePageMeta, useRoute } from '#imports'
 import { useUserStore } from '~/stores/user.store'
 
 const userStore = useUserStore()

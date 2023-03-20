@@ -1,12 +1,10 @@
 <script setup>
 import { useUserStore } from '~/stores/user.store'
-import { onMounted, ref, useHead } from '#imports'
+import { onMounted, ref } from '#imports'
 
 const userStore = useUserStore()
 
 const container = ref(null)
-
-const head = useHead()
 
 onMounted(() => {
   const containerRect = container.value.getBoundingClientRect()
