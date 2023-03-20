@@ -1,70 +1,99 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 import {
   collection,
   doc,
   getDocs,
   addDoc,
-  query,
-  where,
-} from "firebase/firestore";
+  updateDoc,
+  query
+} from 'firebase/firestore'
+import { useNuxtApp, useAsyncData } from '#imports'
 
-export const useUserStore = defineStore("user", {
+export const useUserStore = defineStore('user', {
   state: () => ({
     user: null,
     calendars: [],
     refreshCalendarsFn: null,
+    offsets: {
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0
+    },
+    containerOffsets: {
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0
+    }
   }),
   actions: {
-    setUser(user) {
-      this.user = user;
+    setUser (user) {
+      this.user = user
     },
-    async fetchCalendars() {
+    async fetchCalendars () {
       if (!this.user) {
-        console.error("User not found, cannot fetch calendars.");
-        return;
+        throw new Error('User not found, cannot fetch calendars.')
       }
 
-      const userDocRef = doc(useNuxtApp().$firestore, "users", this.user.uid);
+      const userDocRef = doc(useNuxtApp().$firestore, 'users', this.user.uid)
 
       const { data: calendars, refresh } = await useAsyncData(
-        "calendars",
+        'calendars',
         async () => {
-          const calendarQuery = query(collection(userDocRef, "calendars"));
-          const querySnapshot = await getDocs(calendarQuery);
-          return querySnapshot.docs.map((doc) => ({
+          const calendarQuery = query(collection(userDocRef, 'calendars'))
+          const querySnapshot = await getDocs(calendarQuery)
+          return querySnapshot.docs.map(doc => ({
             id: doc.id,
-            ...doc.data(),
-          }));
+            ...doc.data()
+          }))
         }
-      );
+      )
 
-      this.$patch({ calendars, refreshCalendarsFn: refresh });
+      this.$patch({ calendars, refreshCalendarsFn: refresh })
     },
-    async refreshCalendars() {
+    async refreshCalendars () {
       if (this.refreshCalendarsFn) {
-        await this.refreshCalendarsFn();
+        await this.refreshCalendarsFn()
       } else {
-        console.error(
-          "Refresh function not available, cannot refresh calendars."
-        );
+        throw new Error(
+          'Refresh function not available, cannot refresh calendars.'
+        )
       }
     },
-    async createCalendar(calendarData) {
+    async createCalendar (calendarData) {
       if (!this.user) {
-        console.error("User not found, cannot create calendar.");
-        return;
+        throw new Error('User not found, cannot create calendar.')
       }
 
-      const userDocRef = doc(useNuxtApp().$firestore, "users", this.user.uid);
+      const userDocRef = doc(useNuxtApp().$firestore, 'users', this.user.uid)
 
       try {
-        await addDoc(collection(userDocRef, "calendars"), calendarData);
-        setTimeout(() => {
-          this.refreshCalendars();
-        }, 5000);
+        await addDoc(collection(userDocRef, 'calendars'), calendarData)
+        this.refreshCalendars()
       } catch (error) {
-        console.error("Error creating calendar:", error);
+        throw new Error('Error creating calendar:', error)
       }
+    },
+    async updateCalendar (calendarData) {
+      if (!this.user) {
+        throw new Error('User not found, cannot update calendar.')
+      }
+
+      const calendarDocRef = doc(useNuxtApp().$firestore, `users/${this.user.uid}/calendars`, calendarData.id)
+
+      try {
+        await updateDoc(calendarDocRef, calendarData)
+        this.refreshCalendars()
+      } catch (error) {
+        throw new Error(error)
+      }
+    },
+    setOffsets (offsets) {
+      this.offsets = offsets
+    },
+    setContainerOffsets (offsets) {
+      this.containerOffsets = offsets
     }
-  },
-});
+  }
+})

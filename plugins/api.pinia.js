@@ -1,21 +1,24 @@
-function ApiPlugin({ store }) {
+import { defineNuxtPlugin } from '#imports'
+
+function ApiPlugin ({ store }) {
   store.$subscribe((mutation) => {
     const {
       storeId,
-      events: { newValue },
-    } = mutation;
+      events: { newValue }
+    } = mutation
     switch (storeId) {
-      case "user":
+      case 'user':
         if (newValue) {
-          store.fetchCalendars();
+          store.fetchCalendars()
         }
-        break;
+        break
       default:
-        console.log(mutation);
+        // eslint-disable-next-line no-console
+        console.info(mutation)
     }
-  });
+  })
 }
 
 export default defineNuxtPlugin(({ $pinia }) => {
-  $pinia.use(ApiPlugin);
-});
+  $pinia.use(ApiPlugin)
+})

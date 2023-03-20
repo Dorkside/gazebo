@@ -1,37 +1,37 @@
-const { addDynamicIconSelectors } = require('@iconify/tailwind');
+const { addDynamicIconSelectors } = require('@iconify/tailwind')
 
 module.exports = {
   theme: {
     fontFamily: {
       sans: ['Montserrat', 'sans-serif'],
-      serif: ['Lexend Deca', 'serif'],
+      serif: ['Lexend Deca', 'serif']
     },
-    extend: {},
+    extend: {}
   },
   plugins: [
     require('@tailwindcss/typography'),
-    require("daisyui"),
+    require('daisyui'),
     addDynamicIconSelectors()
   ],
   content: [
-    `components/**/*.{vue,js,ts}`,
-    `layouts/**/*.vue`,
-    `pages/**/*.vue`,
-    `composables/**/*.{js,ts}`,
-    `plugins/**/*.{js,ts}`,
-    `App.{js,ts,vue}`,
-    `app.{js,ts,vue}`,
-    `Error.{js,ts,vue}`,
-    `error.{js,ts,vue}`
+    'components/**/*.{vue,js,ts}',
+    'layouts/**/*.vue',
+    'pages/**/*.vue',
+    'composables/**/*.{js,ts}',
+    'plugins/**/*.{js,ts}',
+    'App.{js,ts,vue}',
+    'app.{js,ts,vue}',
+    'Error.{js,ts,vue}',
+    'error.{js,ts,vue}'
   ],
   daisyui: {
     themes: [
       {
         light: {
-          ...require("daisyui/src/colors/themes")["[data-theme=light]"],
-          primary: "#5540BF",
-        },
-      },
-    ],
-  },
+          ...require('daisyui/src/colors/themes')['[data-theme=light]'],
+          primary: '#5540BF'
+        }
+      }
+    ]
+  }
 }

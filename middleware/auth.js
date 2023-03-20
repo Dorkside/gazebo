@@ -1,8 +1,9 @@
-import { useUserStore } from "~/stores/user.store";
-const userStore = useUserStore();
+import { defineNuxtRouteMiddleware, navigateTo } from '#imports'
+import { useUserStore } from '~/stores/user.store'
+const userStore = useUserStore()
 
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware((to) => {
   if (!userStore.user) {
-    return navigateTo({path: "/login", query: {redirect: to.fullPath}});
+    return navigateTo({ path: '/login', query: { redirect: to.fullPath } })
   }
-});
+})

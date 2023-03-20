@@ -1,17 +1,18 @@
 <script setup>
-import { computed } from "vue";
-import { useUserStore } from "~/stores/user.store";
-const { y } = useWindowScroll();
 
-const hasScrolled = computed(() => y.value > 0);
+import { useWindowScroll, computed, useRoute } from '#imports'
+import { useUserStore } from '~/stores/user.store'
+const { y } = useWindowScroll()
 
-const route = useRoute();
+const hasScrolled = computed(() => y.value > 0)
+
+const route = useRoute()
 
 const isRoot = computed(() => {
-  return route.path === "/";
-});
+  return route.path === '/'
+})
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -63,9 +64,9 @@ const userStore = useUserStore();
             }"
             @click.prevent="$signOut"
           >
-          <span v-if="userStore.user">
-            {{ userStore.user.email }}
-          </span>
+            <span v-if="userStore.user">
+              {{ userStore.user.email }}
+            </span>
           </a>
         </div>
       </div>

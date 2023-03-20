@@ -1,5 +1,21 @@
 <script setup>
-const route = useRoute();
+import { useUserStore } from '~/stores/user.store'
+import { useRoute, onMounted, ref } from '#imports'
+
+const route = useRoute()
+const userStore = useUserStore()
+
+const container = ref(null)
+
+onMounted(() => {
+  const containerRect = container.value.getBoundingClientRect()
+  userStore.setContainerOffsets({
+    x: containerRect.x,
+    y: containerRect.y,
+    width: containerRect.width,
+    height: containerRect.height
+  })
+})
 </script>
 
 <template>
@@ -7,12 +23,16 @@ const route = useRoute();
     <tool-bar />
     <section class="flex flex-1 flex-col stretch justify-items-stretch">
       <header class="bg-base-300 h-36 relative">
-        <h1 class="text-2xl font-bold font-serif absolute bottom-4 left-4 m-0 capitalize">
+        <h1
+          class="text-2xl font-bold font-serif absolute bottom-4 left-4 m-0 capitalize"
+        >
           {{ route.name }}
         </h1>
       </header>
-      <slot />
+      <article ref="container" class="relative">
+        <slot />
+      </article>
     </section>
+    <nav-bar class="fixed top-0 left-0 right-0" />
   </main>
-  <nav-bar class="fixed top-0 left-0 right-0" />
 </template>
