@@ -1,11 +1,12 @@
 <script setup>
 import { useUserStore } from '~/stores/user.store'
-import { useRoute, onMounted, ref } from '#imports'
+import { onMounted, ref, useHead } from '#imports'
 
-const route = useRoute()
 const userStore = useUserStore()
 
 const container = ref(null)
+
+const head = useHead()
 
 onMounted(() => {
   const containerRect = container.value.getBoundingClientRect()
@@ -25,7 +26,7 @@ onMounted(() => {
         <h1
           class="text-2xl font-bold font-serif absolute bottom-4 left-4 m-0 capitalize"
         >
-          {{ route.name }}
+          Dashboard
         </h1>
       </header>
       <article ref="container" class="relative flex flex-1">
