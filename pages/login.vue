@@ -13,7 +13,7 @@ watch(
   () => userStore.user,
   (user) => {
     if (user) {
-      navigateTo(route.query.redirect || '/dashboard')
+      navigateTo(route.query.redirect || '/calendars')
     }
   }
 )

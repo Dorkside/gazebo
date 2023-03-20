@@ -43,8 +43,8 @@ const schema = [
 </script>
 
 <template>
-  <div class="bg-white rounded-lg shadow-lg">
-    <div class="flex flex-col items-center overflow-hidden relative">
+  <div class="bg-white rounded-lg shadow-lg flex-1">
+    <div class="flex flex-col items-center overflow-hidden relative min-h-full">
       <div
         class="calendar-icon text-[120px] text-neutral-200 mb-3 absolute -bottom-24 -left-2 -rotate-12"
       >

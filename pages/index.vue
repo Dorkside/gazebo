@@ -26,7 +26,7 @@
             listings to your website.
           </p>
           <nuxt-link
-            to="/dashboard"
+            to="/calendars"
             class="btn btn-primary"
           >
             Get Started

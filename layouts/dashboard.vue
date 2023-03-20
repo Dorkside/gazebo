@@ -20,8 +20,7 @@ onMounted(() => {
 
 <template>
   <main class="flex flex-row">
-    <tool-bar />
-    <section class="flex flex-1 flex-col stretch justify-items-stretch">
+    <section class="flex flex-1 flex-col stretch justify-items-stretch min-h-screen">
       <header class="bg-base-300 h-36 relative">
         <h1
           class="text-2xl font-bold font-serif absolute bottom-4 left-4 m-0 capitalize"
@@ -29,7 +28,7 @@ onMounted(() => {
           {{ route.name }}
         </h1>
       </header>
-      <article ref="container" class="relative">
+      <article ref="container" class="relative flex flex-1">
         <slot />
       </article>
     </section>
