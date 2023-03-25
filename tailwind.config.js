@@ -11,7 +11,8 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('daisyui'),
-    addDynamicIconSelectors()
+    addDynamicIconSelectors(),
+    require('@formkit/themes/tailwindcss')
   ],
   content: [
     'components/**/*.{vue,js,ts}',
@@ -22,7 +23,8 @@ module.exports = {
     'App.{js,ts,vue}',
     'app.{js,ts,vue}',
     'Error.{js,ts,vue}',
-    'error.{js,ts,vue}'
+    'error.{js,ts,vue}',
+    './node_modules/@formkit/themes/dist/tailwindcss/genesis/index.cjs'
   ],
   daisyui: {
     themes: [

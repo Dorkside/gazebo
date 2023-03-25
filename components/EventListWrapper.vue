@@ -1,10 +1,5 @@
 <script setup>
-import { register } from 'gc-event-list'
 import { ref, onMounted, useMouse, useResizeObserver, computed } from '#imports'
-
-onMounted(() => {
-  register()
-})
 
 const { x, y } = useMouse()
 

@@ -1,7 +1,8 @@
 <script setup>
 import { FormKit, FormKitSchema } from '@formkit/vue'
+import { computed } from '#imports'
 
-defineProps({
+const props = defineProps({
   modelValue: {
     type: Object,
     required: true
@@ -30,16 +31,23 @@ const schema = [
     label: 'Description',
     placeholder: 'Description',
     rules: 'required'
-  },
-  {
-    $formkit: 'text',
+  }, {
+    $formkit: 'repeater',
     name: 'calendarIds',
-    type: 'taglist',
-    label: 'Calendar IDs',
-    placeholder: 'Calendar IDs',
-    allowNewValues: true
+    type: 'text',
+    label: 'Calendar Ids',
+    placeholder: 'Calendar Ids',
+    children: [
+      {
+        $formkit: 'text'
+      }
+    ]
   }
 ]
+
+const calendarIds = computed(() => {
+  return props.modelValue.calendarIds?.join(',') || ''
+})
 </script>
 
 <template>
@@ -59,14 +67,21 @@ const schema = [
         </p>
       </div>
       <div v-if="editable">
-        <div class="flex justify-center items-center">
-          <FormKit
-            :value="modelValue"
-            type="form"
-            @submit="emit('update:modelValue',$event)"
-          >
-            <FormKitSchema :schema="schema" />
-          </FormKit>
+        <div class="flex justify-center items-start">
+          <div class="flex-1">
+            <FormKit
+              :value="modelValue"
+              type="form"
+              @submit="emit('update:modelValue',$event)"
+            >
+              <FormKitSchema :schema="schema" />
+            </FormKit>
+          </div>
+
+          <!-- <event-list
+            class="flex-1"
+            :calendar-ids="calendarIds"
+          /> -->
         </div>
       </div>
     </div>

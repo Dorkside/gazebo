@@ -19,8 +19,8 @@ onMounted(() => {
 
 <template>
   <main class="flex flex-row">
-    <section class="flex flex-1 flex-col stretch justify-items-stretch min-h-screen">
-      <header class="bg-base-300 h-36 relative">
+    <section class="flex flex-1 flex-col stretch justify-items-start items-stretch min-h-screen max-h-screen overflow-hidden">
+      <header class="bg-base-300 h-36 relative flex-none">
         <h1
           class="text-2xl font-bold font-serif absolute bottom-4 left-4 m-0 capitalize"
         >
