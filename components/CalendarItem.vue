@@ -39,7 +39,7 @@ const schema = [
     placeholder: 'Calendar Ids',
     allowNewValues: true,
     options: [],
-    emptyMessage: 'No calendars found',
+    emptyMessage: 'No calendars found'
   }
 ]
 
@@ -56,8 +56,18 @@ const calendarIds = computed(() => {
       >
         <span class="icon-[fa--calendar]" />
       </div>
-      <div v-if="editable" class="relative flex justify-center items-start max-h-full z-1">
-        <div class="flex-1 max-h-full overflow-auto">
+      <div v-if="!editable" class="flex-1 flex flex-col justify-center items-center p-8">
+        <div class="flex flex-col items-center">
+          <h1 class="text-2xl font-medium mb-2">
+            {{ props.modelValue.name }}
+          </h1>
+          <p class="text-sm text-neutral-500">
+            {{ props.modelValue.description }}
+          </p>
+        </div>
+      </div>
+      <div v-if="editable" class="container mx-auto relative flex justify-center items-start max-h-full z-1 overflow-hidden">
+        <div class="flex-1 max-h-full overflow-auto p-4">
           <FormKit
             :value="modelValue"
             type="form"
@@ -66,13 +76,15 @@ const calendarIds = computed(() => {
             <FormKitSchema :schema="schema" />
           </FormKit>
         </div>
-        <div class="flex-1 max-h-full overflow-auto">
-          {{ modelValue }}
-          <event-list
+        <div class="flex-1 flex flex-col p-4 overflow-hidden max-h-full">
+          <div
             v-if="calendarIds"
-            class="flex-1"
-            :calendar-ids="calendarIds"
-          />
+            class="h-full flex-1 overflow-auto"
+          >
+            <event-list
+              :calendar-ids="calendarIds"
+            />
+          </div>
         </div>
       </div>
     </div>

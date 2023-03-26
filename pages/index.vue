@@ -1,5 +1,21 @@
 <template>
   <div class="bg-white">
+    <ClientOnly>
+      <Teleport to="#nav-menu">
+        <a href="#" class="text-white py-2 px-4 hover:text-gray-400">
+          Features
+        </a>
+        <a href="#" class="text-white py-2 px-4 hover:text-gray-400">
+          Pricing
+        </a>
+        <nuxt-link
+          to="/calendars"
+          class="btn ml-4 transition-colors ease-in-out duration-500 font-bold btn-primary"
+        >
+          Dashboard
+        </nuxt-link>
+      </Teleport>
+    </ClientOnly>
     <div class="h-screen relative min-h-screen landing-bg bg-fixed">
       <div
         class="absolute top-0 left-0 bottom-0 right-0 z-0 opacity-100 bg-gradient-to-r from-black to-transparent"

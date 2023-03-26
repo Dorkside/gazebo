@@ -1,18 +1,10 @@
 <script setup>
 
-import { useWindowScroll, computed, useRoute } from '#imports'
-import { useUserStore } from '~/stores/user.store'
+import { useWindowScroll, computed } from '#imports'
 const { y } = useWindowScroll()
 
 const hasScrolled = computed(() => y.value > 0)
 
-const route = useRoute()
-
-const isRoot = computed(() => {
-  return route.path === '/'
-})
-
-const userStore = useUserStore()
 </script>
 
 <template>
@@ -22,9 +14,9 @@ const userStore = useUserStore()
   >
     <div class="container mx-auto py-4">
       <div class="flex justify-between items-center">
-        <a href="#" class="text-white font-bold text-lg font-serif">
+        <NuxtLink to="/" class="text-white font-bold text-lg font-serif">
           <logo-title />
-        </a>
+        </NuxtLink>
         <button class="burger block lg:hidden focus:outline-none">
           <svg
             class="h-6 w-6 fill-current text-white"
@@ -35,40 +27,7 @@ const userStore = useUserStore()
             <path d="M0 3h20v2H0zm0 6h20v2H0zm0 6h20v2H0z" />
           </svg>
         </button>
-        <div id="nav-menu" class="hidden lg:flex lg:items-center">
-          <template v-if="isRoot">
-            <a href="#" class="text-white py-2 px-4 hover:text-gray-400">
-              Features
-            </a>
-            <a href="#" class="text-white py-2 px-4 hover:text-gray-400">
-              Pricing
-            </a>
-            <nuxt-link
-              to="/calendars"
-              class="btn ml-4 transition-colors ease-in-out duration-500 font-bold"
-              :class="{
-                'btn-primary': !hasScrolled,
-                'btn-outline btn-accent': hasScrolled,
-              }"
-            >
-              Dashboard
-            </nuxt-link>
-          </template>
-
-          <a
-            v-else
-            class="btn ml-4 transition-colors ease-in-out duration-500 font-bold"
-            :class="{
-              'btn-primary': !hasScrolled,
-              'btn-outline btn-accent': hasScrolled,
-            }"
-            @click.prevent="$signOut"
-          >
-            <span v-if="userStore.user">
-              {{ userStore.user.email }}
-            </span>
-          </a>
-        </div>
+        <div id="nav-menu" class="hidden lg:flex lg:items-center" />
       </div>
     </div>
   </nav>

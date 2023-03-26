@@ -26,6 +26,14 @@ const updateCalendar = (calendar) => {
 
 <template>
   <div class="flex flex-1">
+    <ClientOnly>
+      <Teleport to="#header">
+        <div class="text-xl font-medium">
+          /
+          {{ calendar?.name }}
+        </div>
+      </Teleport>
+    </ClientOnly>
     <calendar-item
       v-if="calendar"
       :model-value="calendar"

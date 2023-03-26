@@ -17,25 +17,17 @@ const calendarRefs = ref({})
 const mountRef = (el, id) => {
   calendarRefs.value[id] = el
 }
-
-const selectCalendar = (id) => {
-  const clientRect = calendarRefs.value[id].getBoundingClientRect()
-  userStore.setOffsets({
-    x: clientRect.x,
-    y: clientRect.y,
-    width: clientRect.width,
-    height: clientRect.height
-  })
-}
 </script>
 
 <template>
   <div class="container mx-auto absolute top-0 left-0 right-0 bottom-0">
-    <div class="flex justify-end mb-4">
-      <button class="btn btn-primary" @click="showModal = !showModal">
-        Create Calendar
-      </button>
-    </div>
+    <ClientOnly>
+      <Teleport to="#actions">
+        <button class="btn btn-primary" @click="showModal = !showModal">
+          Create Calendar
+        </button>
+      </Teleport>
+    </ClientOnly>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
       <template
@@ -50,7 +42,6 @@ const selectCalendar = (id) => {
           >
             <calendar-item
               :model-value="calendar"
-              @click="selectCalendar(calendar.id)"
             />
           </NuxtLink>
         </div>
