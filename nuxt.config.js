@@ -4,8 +4,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
-    '@pinia/nuxt',
-    '@formkit/nuxt'
+    '@pinia/nuxt'
   ],
   vue: {
     compilerOptions: {
