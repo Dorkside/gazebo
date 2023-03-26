@@ -30,6 +30,7 @@ export default defineNuxtPlugin(({ $pinia, ...other }) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       userStore.setUser(user)
+      userStore.fetchCalendars();
     } else if (userStore.user) {
       userStore.setUser(null)
       window.location.reload(true)

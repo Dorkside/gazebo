@@ -32,16 +32,14 @@ const schema = [
     placeholder: 'Description',
     rules: 'required'
   }, {
-    $formkit: 'repeater',
+    $formkit: 'taglist',
     name: 'calendarIds',
     type: 'text',
     label: 'Calendar Ids',
     placeholder: 'Calendar Ids',
-    children: [
-      {
-        $formkit: 'text'
-      }
-    ]
+    allowNewValues: true,
+    options: [],
+    emptyMessage: 'No calendars found',
   }
 ]
 
@@ -51,37 +49,30 @@ const calendarIds = computed(() => {
 </script>
 
 <template>
-  <div class="bg-white rounded-lg shadow-lg flex-1">
-    <div class="flex flex-col items-center overflow-hidden relative min-h-full">
+  <div class="bg-white rounded-lg shadow-lg flex-1 flex">
+    <div class="flex flex-1 flex-col items-stretch overflow-hidden relative min-h-full max-h-full">
       <div
-        class="calendar-icon text-[120px] text-neutral-200 mb-3 absolute -bottom-24 -left-2 -rotate-12"
+        class="calendar-icon text-[120px] text-neutral-200 mb-3 absolute -bottom-24 -left-2 -rotate-12 z-0"
       >
         <span class="icon-[fa--calendar]" />
       </div>
-      <div class="text-center p-5 relative">
-        <h3 class="text-lg font-semibold text-gray-900">
-          {{ modelValue.name }}
-        </h3>
-        <p class="text-sm text-gray-500 mt-1">
-          {{ modelValue.description }}
-        </p>
-      </div>
-      <div v-if="editable">
-        <div class="flex justify-center items-start">
-          <div class="flex-1">
-            <FormKit
-              :value="modelValue"
-              type="form"
-              @submit="emit('update:modelValue',$event)"
-            >
-              <FormKitSchema :schema="schema" />
-            </FormKit>
-          </div>
-
-          <!-- <event-list
+      <div v-if="editable" class="relative flex justify-center items-start max-h-full z-1">
+        <div class="flex-1 max-h-full overflow-auto">
+          <FormKit
+            :value="modelValue"
+            type="form"
+            @submit="emit('update:modelValue',$event)"
+          >
+            <FormKitSchema :schema="schema" />
+          </FormKit>
+        </div>
+        <div class="flex-1 max-h-full overflow-auto">
+          {{ modelValue }}
+          <event-list
+            v-if="calendarIds"
             class="flex-1"
             :calendar-ids="calendarIds"
-          /> -->
+          />
         </div>
       </div>
     </div>

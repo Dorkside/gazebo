@@ -27,7 +27,7 @@ onMounted(() => {
           Dashboard
         </h1>
       </header>
-      <article ref="container" class="relative flex flex-1">
+      <article ref="container" class="relative flex flex-1 overflow-hidden">
         <slot />
       </article>
     </section>

@@ -10,7 +10,10 @@ export default {
     ...genesisIcons
   },
   config: {
-    classes: generateClasses(genesis, genesisPro)
+    classes: {
+      ...generateClasses(genesis),
+      ...generateClasses(genesisPro)
+    }
   },
   plugins: [
     createProPlugin('fk-495f738bf5', inputs)
