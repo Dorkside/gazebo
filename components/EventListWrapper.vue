@@ -35,7 +35,7 @@ const transform = computed(
     :style="{ transform }"
   >
     <event-list
-      calendar-ids="0bd46055c48039d805a0d146505ad2892ac67ccf5f14943edb3357cb78b36946@group.calendar.google.com"
+      gazebo-id="QPipsXL3bjVtkFlbs9PF"
     />
   </aside>
 </template>

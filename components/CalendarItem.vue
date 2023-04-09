@@ -116,7 +116,7 @@ const addCalendar = () => {
             class="h-full flex-1 overflow-auto"
           >
             <event-list
-              gazebo-id="QPipsXL3bjVtkFlbs9PF"
+              :gazebo-id="modelValue.id"
             />
           </div>
         </div>
