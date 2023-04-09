@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../deno-cve"
+		},
+		{
+			"path": "../gc-event-list"
+		}
+	],
+	"settings": {}
+}

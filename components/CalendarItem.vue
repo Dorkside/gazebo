@@ -16,7 +16,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const formValue = ref(structuredClone(toRaw(props.modelValue)))
+const formValue = ref(structuredClone({ calendarIds: [], ...toRaw(props.modelValue) }))
 
 const newCalendar = ref('')
 
@@ -29,6 +29,13 @@ const changesMade = computed(() => {
 })
 
 const route = useRoute()
+
+const addCalendar = () => {
+  if (newCalendar.value) {
+    formValue.value.calendarIds.push(newCalendar.value)
+    newCalendar.value = ''
+  }
+}
 </script>
 
 <template>
@@ -95,7 +102,7 @@ const route = useRoute()
                   <input v-model="newCalendar" type="text" placeholder="Add calendar ID" class="input input-bordered w-full">
                   <button
                     class="btn btn-primary"
-                    @click.prevent="formValue.calendarIds.push(newCalendar); newCalendar = ''"
+                    @click.prevent="addCalendar"
                   >
                     <i class="text-lg icon-[material-symbols--add]" />
                   </button>
@@ -106,11 +113,10 @@ const route = useRoute()
         </div>
         <div class="flex-1 flex flex-col p-4 overflow-hidden max-h-full">
           <div
-            v-if="calendarIds"
             class="h-full flex-1 overflow-auto"
           >
             <event-list
-              :calendar-ids="calendarIds"
+              gazebo-id="QPipsXL3bjVtkFlbs9PF"
             />
           </div>
         </div>

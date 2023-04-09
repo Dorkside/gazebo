@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from 'nuxt/config'
+import { searchForWorkspaceRoot } from 'vite'
 
 export default defineNuxtConfig({
   modules: [
@@ -14,5 +15,15 @@ export default defineNuxtConfig({
   css: ['@/assets/css/fonts.css'],
   imports: {
     autoImport: false
+  },
+  vite: {
+    server: {
+      fs: {
+        allow: [
+          searchForWorkspaceRoot(process.cwd()),
+          '/Users/jamesmartin/Workspace/gc-event-list/packages/gc-event-list/dist'
+        ]
+      }
+    }
   }
 })

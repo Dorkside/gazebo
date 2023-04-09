@@ -3,6 +3,7 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "emulators": "npx firebase emulators:start --only functions",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -26,7 +27,6 @@
     "daisyui": "^2.51.3",
     "fast-deep-equal": "^3.1.3",
     "firebase": "^9.17.2",
-    "gc-event-list": "^0.2.5",
     "pinia": "^2.0.33"
   },
   "overrides": {
