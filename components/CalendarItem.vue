@@ -16,12 +16,12 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const formValue = ref(structuredClone({ calendarIds: [], ...toRaw(props.modelValue) }))
+const formValue = ref(structuredClone({ calendarIds: [], calendarConfigs: {}, ...toRaw(props.modelValue) }))
 
 const newCalendar = ref('')
 
 const changesMade = computed(() => {
-  return !equals(props.modelValue, formValue.value)
+  return !equals(props.modelValue, formValue.value) || !equals(props.modelValue.calendarConfigs, formValue.value.calendarConfigs)
 })
 
 const route = useRoute()
@@ -32,13 +32,19 @@ const addCalendar = () => {
     newCalendar.value = ''
   }
 }
+
+const save = () => {
+  emit('update:modelValue', {
+    ...formValue.value
+  })
+}
 </script>
 
 <template>
   <div class="bg-white rounded-lg shadow-lg flex-1 flex">
     <ClientOnly>
       <Teleport to="#actions">
-        <button v-if="route.params.id === modelValue.id" class="btn btn-success" :disabled="!changesMade" @click="emit('update:modelValue', formValue)">
+        <button v-if="route.params.id === modelValue.id" class="btn btn-success" :disabled="!changesMade" @click="save">
           Save
         </button>
       </Teleport>
@@ -97,8 +103,9 @@ const addCalendar = () => {
           </div>
 
           <div v-for="calendarId of formValue.calendarIds" :key="calendarId" class="card w-full shadow-lg mb-2 bg-white">
-            <div class="card-body">
-              <span class="card-title overflow-hidden w-full text-ellipsis inline-block" :title="calendarId">{{ calendarId }}</span>
+            <div class="card-body break-all">
+              <span class="card-title" :title="calendarId">{{ calendarId }}</span>
+              <input type="color" class="color-picker" :value="formValue.calendarConfigs[calendarId].color" @input="formValue.calendarConfigs[calendarId].color = $event.target.value">
               <div class="card-actions justify-end">
                 <button class="btn btn-accent btn-sm" @click.prevent="formValue.calendarIds.splice(formValue.calendarIds.indexOf(calendarId),1)">
                   <i class="text-lg icon-[material-symbols--remove]" /> Remove
@@ -139,3 +146,26 @@ const addCalendar = () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.color-picker {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  width: 48px;
+  height: 48px;
+  border: none;
+  cursor: pointer;
+}
+.color-picker::-webkit-color-swatch {
+  border-radius: var(--rounded-button, 0.5rem);
+  border: none;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+.color-picker::-moz-color-swatch {
+  border-radius: var(--rounded-button, 0.5rem);
+  border: none;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+</style>
