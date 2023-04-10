@@ -5,7 +5,8 @@ import {
   getDocs,
   addDoc,
   updateDoc,
-  query
+  query,
+  deleteDoc
 } from 'firebase/firestore'
 import { useNuxtApp, useAsyncData } from '#imports'
 
@@ -84,6 +85,20 @@ export const useUserStore = defineStore('user', {
 
       try {
         await updateDoc(calendarDocRef, calendarData)
+        this.refreshCalendars()
+      } catch (error) {
+        throw new Error(error)
+      }
+    },
+    async deleteCalendar(calendarId) {
+      if (!this.user) {
+        throw new Error('User not found, cannot delete calendar.')
+      }
+
+      const calendarDocRef = doc(useNuxtApp().$firestore, `users/${this.user.uid}/calendars`, calendarId)
+
+      try {
+        await deleteDoc(calendarDocRef)
         this.refreshCalendars()
       } catch (error) {
         throw new Error(error)

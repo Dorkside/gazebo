@@ -1,9 +1,10 @@
 <script setup>
-import { computed, definePageMeta, useRoute } from '#imports'
+import { computed, definePageMeta, useRoute, useRouter, ref, watch } from '#imports'
 import { useUserStore } from '~/stores/user.store'
 
 const userStore = useUserStore()
 const route = useRoute()
+const router = useRouter()
 
 definePageMeta({
   middleware: ['auth'],
@@ -14,14 +15,23 @@ definePageMeta({
 })
 
 const calendar = computed(() => {
-  return userStore.calendars.find(
+  const cal = userStore.calendars.find(
     calendar => calendar.id === route.params.id
   )
+  return cal
+})
+
+watch(calendar, (cal) => {
+  if (!cal) {
+    router.replace('/calendars')
+  }
 })
 
 const updateCalendar = (calendar) => {
   userStore.updateCalendar(calendar)
 }
+
+const showModal = ref(false)
 </script>
 
 <template>
@@ -39,6 +49,8 @@ const updateCalendar = (calendar) => {
       :model-value="calendar"
       :editable="true"
       @update:model-value="updateCalendar"
+      @delete="showModal = true"
     />
+    <DeleteCalendarModal :calendar="calendar" :show="showModal" @cancel="showModal = false" />
   </div>
 </template>

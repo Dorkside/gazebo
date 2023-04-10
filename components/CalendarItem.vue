@@ -20,10 +20,6 @@ const formValue = ref(structuredClone({ calendarIds: [], ...toRaw(props.modelVal
 
 const newCalendar = ref('')
 
-const calendarIds = computed(() => {
-  return formValue.value.calendarIds?.join(',') || ''
-})
-
 const changesMade = computed(() => {
   return !equals(props.modelValue, formValue.value)
 })
@@ -65,7 +61,11 @@ const addCalendar = () => {
       </div>
       <div v-if="editable" class="container mx-auto relative flex justify-center items-start max-h-full z-1 overflow-hidden">
         <div class="flex-1 max-h-full overflow-auto p-4">
-          <div class="card w-full shadow-lg mb-2">
+          <h2 class="text-xl mt-8 font-serif">
+            General
+          </h2>
+
+          <div class="card w-full shadow-lg mb-2 bg-white">
             <div class="card-body">
               <div class="form-control w-full">
                 <label class="label font-serif font-medium">
@@ -82,40 +82,55 @@ const addCalendar = () => {
             </div>
           </div>
 
-          <div class="card w-full shadow-lg mb-2">
+          <h2 class="text-xl mt-8 font-serif">
+            Calendars
+          </h2>
+
+          <div class="form-control w-full flex flex-row input-group input-group-sm my-2">
+            <input v-model="newCalendar" type="text" placeholder="Add calendar ID" class="input input-sm input-bordered w-full">
+            <button
+              class="btn btn-primary btn-sm"
+              @click.prevent="addCalendar"
+            >
+              <i class="text-lg icon-[material-symbols--add]" /> Add
+            </button>
+          </div>
+
+          <div v-for="calendarId of formValue.calendarIds" :key="calendarId" class="card w-full shadow-lg mb-2 bg-white">
             <div class="card-body">
-              <span class="label-text font-serif font-medium">Calendar IDs</span>
-
-              <div class="p-2">
-                <div v-for="calendarId of formValue.calendarIds" :key="calendarId" class="form-control w-full max-w-full flex flex-row input-group">
-                  <span class="overflow-hidden w-full text-ellipsis inline-block leading-8">
-                    {{ calendarId }}
-                  </span>
-
-                  <button class="btn btn-accent btn-sm" @click.prevent="formValue.calendarIds.splice(formValue.calendarIds.indexOf(calendarId),1)">
-                    <i class="text-lg icon-[material-symbols--remove]" />
-                  </button>
-                </div>
+              <span class="card-title overflow-hidden w-full text-ellipsis inline-block" :title="calendarId">{{ calendarId }}</span>
+              <div class="card-actions justify-end">
+                <button class="btn btn-accent btn-sm" @click.prevent="formValue.calendarIds.splice(formValue.calendarIds.indexOf(calendarId),1)">
+                  <i class="text-lg icon-[material-symbols--remove]" /> Remove
+                </button>
               </div>
-              <div class="card-actions">
-                <div class="form-control w-full flex flex-row input-group">
-                  <input v-model="newCalendar" type="text" placeholder="Add calendar ID" class="input input-bordered w-full">
-                  <button
-                    class="btn btn-primary"
-                    @click.prevent="addCalendar"
-                  >
-                    <i class="text-lg icon-[material-symbols--add]" />
+            </div>
+          </div>
+
+          <h2 class="text-xl mt-8 font-serif">
+            Danger zone
+          </h2>
+
+          <div class="card w-full shadow-lg mb-2 bg-white">
+            <div class="card-body">
+              <div class="p-2">
+                <div class="button-group">
+                  <button class="btn btn-error btn-block" @click.prevent="emit('delete')">
+                    <i class="text-lg icon-[material-symbols--delete]" />
+                    <span>Delete this Gazebo</span>
                   </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div class="flex-1 flex flex-col p-4 overflow-hidden max-h-full">
           <div
             class="h-full flex-1 overflow-auto"
           >
             <event-list
+              user-id="MM9i9uWfMOXpZS5a5XFs0Dx58o23"
               :gazebo-id="modelValue.id"
             />
           </div>
