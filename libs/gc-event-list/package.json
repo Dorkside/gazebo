@@ -4,8 +4,8 @@
   "private": false,
   "type": "module",
   "scripts": {
-    "dev": "vite build --watch --emptyOutDir",
-    "build": "vite build",
+    "dev": "vite build --emptyOutDir",
+    "build": "vite build --emptyOutDir",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },
