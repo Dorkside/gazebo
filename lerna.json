@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "useWorkspaces": true,
+  "version": "0.2.6",
+  "command": {
+    "publish": {
+      "allowBranch": "main",
+      "conventionalCommits": true
+    }
+  },
+  "useNx": true
+}

@@ -1,0 +1,12 @@
+{
+  "name": "firebase",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "14"
+  },
+  "scripts": {
+    "dev": "firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions"
+  }
+}

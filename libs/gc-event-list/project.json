@@ -1,0 +1,40 @@
+{
+  "$schema": "../.../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/gc-event-list/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vite build",
+        "cwd": "libs/gc-event-list"
+      },
+      "configurations": {
+        "watch": {
+          "command": "vite build --watch"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/gc-event-list/**/*.vue",
+          "libs/gc-event-list/**/*.js",
+          "libs/gc-event-list/**/*.jsx",
+          "libs/gc-event-list/**/*.cjs",
+          "libs/gc-event-list/**/*.mjs"
+        ],
+        "fix": true
+      }
+    },
+    "format": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prettier --write libs/gc-event-list/src/",
+        "cwd": "libs/gc-event-list"
+      }
+    }
+  },
+  "tags": []
+}

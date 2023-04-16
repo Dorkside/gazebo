@@ -1,0 +1,21 @@
+{
+  "projectType": "application",
+  "root": "apps/firebase",
+  "sourceRoot": "apps/firebase/functions",
+  "targets": {
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run dev",
+        "cwd": "apps/firebase"
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run deploy",
+        "cwd": "apps/firebase"
+      }
+    }
+  }
+}

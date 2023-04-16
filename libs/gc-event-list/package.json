@@ -1,0 +1,24 @@
+{
+  "name": "gc-event-list",
+  "version": "0.2.6",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --watch --emptyOutDir",
+    "build": "vite build",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/require.umd.cjs"
+    }
+  },
+  "gitHead": "e361d81cb2fcbea17c0a3250af1d2161bd7af604"
+}
