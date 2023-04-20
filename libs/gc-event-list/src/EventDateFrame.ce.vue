@@ -1,7 +1,7 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref, watch, inject } from 'vue';
 
-const props = defineProps(['start','end','hasOccurences'])
+const props = defineProps(['start','end','hasOccurences','event'])
 
 const start = computed(() => new Date(props.start))
 const end = computed(() => new Date(props.end))
@@ -23,12 +23,21 @@ const endDate = computed(() => {
   }
   return `${end.value.toLocaleDateString('default', dateConfig)}`;
 });
+
+const dateColor = ref('#f5f5f5')
+const dateTextColor = ref('#000000')
+
+watch(inject('configs'), (val) => {
+  const config = val[props.event.organizer.email];
+  dateColor.value = config?.dateColor || '#f5f5f5';
+  dateTextColor.value = config?.dateTextColor || '#000000';
+}, { immediate: true })
 </script>
 
 <template>
   <div class="date-frame">
     <template v-if="!hasOccurences">
-      <h5>
+      <h5 class="month">
         {{ start.toLocaleString('default', { month: 'short' }) }}
       </h5>
       <h4 class="date">
@@ -65,15 +74,20 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #f5f5f5;
+  background: v-bind(dateColor);
   text-transform: uppercase;
   width: 100px;
   padding: 8px;
 }
+.date-frame .month {
+  color: v-bind(dateTextColor);
+}
 .date-frame .date {
   font-size: 2rem;
+  color: v-bind(dateTextColor);
 }
 .date-frame .end-date {
-  color: #999;
+  color: v-bind(dateTextColor);
+  opacity: 0.5;
 }
 </style>

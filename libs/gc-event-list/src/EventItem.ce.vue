@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, inject, onMounted, ref, watch } from 'vue'
 import { RRule } from 'rrule'
 
 import dayjs from 'dayjs';
@@ -10,12 +10,6 @@ const props = defineProps(['event'])
 
 const start = computed(() => props.event.start.date || props.event.start.dateTime)
 const end = computed(() => props.event.end.date || props.event.end.dateTime)
-
-const saturations = {
-  "Régates": "250deg"
-};
-
-const saturation = computed(() => saturations[props.event.organizer.displayName] || "0deg");
 
 const rules = computed(() => {
   if (props.event.recurrence) {
@@ -41,6 +35,15 @@ const occurrences = computed(() => {
   }
   return null;
 });
+
+const eventColor = ref('#000055')
+const textColor = ref('#ffffff')
+
+watch(inject('configs'), (val) => {
+  const config = val[props.event.organizer.email];
+  eventColor.value = config?.eventColor || '#000055';
+  textColor.value = config?.textColor || '#ffffff';
+}, { immediate: true })
 </script>
 
 <template>
@@ -49,7 +52,7 @@ const occurrences = computed(() => {
       <div class="event-occurrences flex-1" v-if="occurrences">
         <event-occurrences :occurrences="occurrences" />
       </div>
-      <event-date-frame class="flex-1" :start="start" :end="end" :has-occurences="occurrences"/>
+      <event-date-frame :event="event" class="flex-1" :start="start" :end="end" :has-occurences="occurrences"/>
     </div>
     <div class="content-frame">
       <h3 v-if="event.summary" class="title" >
@@ -61,6 +64,8 @@ const occurrences = computed(() => {
       <p v-if="event.description">{{ event.description }}</p>
       <p v-if="event.location">
         {{ event.location }}
+
+      {{ config }}
       </p>
     </div>
     <h5 class="type-frame" v-if="event.organizer.displayName">
@@ -95,7 +100,7 @@ p {
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  color: white;
+  color: v-bind(textColor);
   padding: 8px;
 }
 .content-frame .title {
@@ -105,7 +110,7 @@ p {
 }
 .event {
   padding: 4px;
-  background: hsl(v-bind(saturation), 50%, 50%);
+  background: v-bind(eventColor);
   display: flex;
   flex-direction: row;
   position: relative;
