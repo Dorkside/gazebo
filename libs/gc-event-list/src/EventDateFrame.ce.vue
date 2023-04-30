@@ -27,10 +27,12 @@ const endDate = computed(() => {
 const dateColor = ref('#f5f5f5')
 const dateTextColor = ref('#000000')
 
-watch(inject('configs'), (val) => {
-  const config = val[props.event.organizer.email];
-  dateColor.value = config?.dateColor || '#f5f5f5';
-  dateTextColor.value = config?.dateTextColor || '#000000';
+watch(() => [inject('configs'), props.event], (val) => {
+  if (props.event) {
+    const config = val[props.event.organizer.email];
+    dateColor.value = config?.dateColor || '#f5f5f5';
+    dateTextColor.value = config?.dateTextColor || '#000000';
+  }
 }, { immediate: true })
 </script>
 

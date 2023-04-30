@@ -1,5 +1,5 @@
 <script setup>
-import { computed, inject, onMounted, ref, watch } from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import { RRule } from 'rrule'
 
 import dayjs from 'dayjs';
@@ -39,10 +39,12 @@ const occurrences = computed(() => {
 const eventColor = ref('#000055')
 const textColor = ref('#ffffff')
 
-watch(inject('configs'), (val) => {
-  const config = val[props.event.organizer.email];
-  eventColor.value = config?.eventColor || '#000055';
-  textColor.value = config?.textColor || '#ffffff';
+watch(() => [inject('configs'), props.event], (val) => {
+  if (props.event) {
+    const config = val[props.event.organizer.email];
+    eventColor.value = config?.eventColor || '#000055';
+    textColor.value = config?.textColor || '#ffffff';
+  }
 }, { immediate: true })
 </script>
 
