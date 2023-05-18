@@ -39,7 +39,7 @@ const configStringRef = toRef(props, 'configString');
 const configs = ref({})
 
 watch(configStringRef, () => {
-  configs.value = JSON.parse(configStringRef.value);
+  configs.value = configStringRef.value && JSON.parse(configStringRef.value);
 }, { immediate: true });
 
 provide('configs', configs);

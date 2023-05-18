@@ -6,14 +6,14 @@
     "dev": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "vite build --watch",
+        "command": "vite build --watch --emptyOutDir",
         "cwd": "libs/gc-event-list"
       }
     },
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "vite build",
+        "command": "vite build --emptyOutDir",
         "cwd": "libs/gc-event-list"
       }
     },
