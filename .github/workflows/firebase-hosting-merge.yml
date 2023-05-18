@@ -9,7 +9,7 @@ name: Deploy to Firebase Hosting on merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latestenv:
-      VITE_FUNCTIONS_URL: ${{ env.VITE_FUNCTIONS_URL }}
+      VITE_FUNCTIONS_URL: '${{ env.VITE_FUNCTIONS_URL }}'
     steps:
       - uses: actions/checkout@v2
       - run: npm ci && npm run build
